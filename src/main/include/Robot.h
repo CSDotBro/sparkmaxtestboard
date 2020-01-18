@@ -8,6 +8,7 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <rev/CANSparkMax.h>
+#include <rev/CANSparkMaxLowLevel.h>
 
 class Robot : public frc::TimedRobot {
 public:
@@ -23,11 +24,11 @@ public:
 private:
     frc::Joystick joystick0{0};
     // frc::Joystick joystick1{1};
-    rev::CANEncoder encoder0;
-    rev::CANEncoder encoder1;
-    rev::CANPIDController controller0;
-    rev::CANPIDController controller1;
-    rev::CANSparkMax spark0{14, rev::CANSparkMax::MotorType::kBrushless};
-    rev::CANSparkMax spark1{15, rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax spark0{14, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANSparkMax spark1{15, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANEncoder encoder0 = spark0.GetEncoder();
+    rev::CANEncoder encoder1 = spark1.GetEncoder();
+    rev::CANPIDController controller0 = spark0.GetPIDController();
+    rev::CANPIDController controller1 = spark1.GetPIDController();
     units::revolutions_per_minute_t reference = 0.0_rpm;
 };
