@@ -24,10 +24,12 @@ Robot::Robot(){
 void Robot::RobotInit() {}
 
 void Robot::RobotPeriodic() {
-    std::cout << "Left Vel:" << encoder0.GetVelocity() << std::endl;
-    std::cout << "Right Vel:" << encoder1.GetVelocity() << std::endl;
-    std::cout << "Left Temp: " << spark0.GetMotorTemperature() << std::endl;
-    std::cout << "Left Temp: " << spark1.GetMotorTemperature() << std::endl;
+    //std::cout << "Left Vel:" << encoder0.GetVelocity() << std::endl;
+    //std::cout << "Right Vel:" << encoder1.GetVelocity() << std::endl;
+    //std::cout << "Left Temp: " << spark0.GetMotorTemperature() << std::endl;
+    //std::cout << "Left Temp: " << spark1.GetMotorTemperature() << std::endl;
+
+    logger.Log(spark0.GetMotorTemperature(), spark1.GetMotorTemperature(), encoder0.GetVelocity(), encoder1.GetVelocity());
 }
 
 void Robot::AutonomousInit() {}
@@ -83,67 +85,39 @@ void Robot::TeleopPeriodic() {
        spark1.Set(-.2);
      }
      else if (joystick0.GetRawButtonPressed(3)) {
-              spark0.Set(0.3);
+       spark0.Set(0.3);
        spark1.Set(-.3);
      }
      else if (joystick0.GetRawButtonPressed(4)) {
-              spark0.Set(0.4);
-
+       spark0.Set(0.4);
        spark1.Set(-.4);
      }
      else if (joystick0.GetRawButtonPressed(7)) {
-              spark0.Set(0.5);
-
+       spark0.Set(0.5);
        spark1.Set(-.5);
      }
      else if (joystick0.GetRawButtonPressed(8)) {
-              spark0.Set(0.6);
-
+       spark0.Set(0.6);
        spark1.Set(-.6);
      }
      else if (joystick0.GetRawButtonPressed(9)) {
-              spark0.Set(0.7);
-
+       spark0.Set(0.7);
        spark1.Set(-.7);
      }
      else if (joystick0.GetRawButtonPressed(10)) {
-              spark0.Set(0.8);
-
+       spark0.Set(0.8);
        spark1.Set(-.8);
      }
      else if (joystick0.GetRawButtonPressed(11)) {
-              spark0.Set(0.55);
-
-       spark1.Set(-0.55);
+        spark0.Set(0.55);
+        spark1.Set(-0.55);
      } else if (joystick0.GetRawButtonPressed(12)) {
-              spark0.Set(0.65);
-       spark1.Set(-0.65);
+        spark0.Set(0.65);
+        spark1.Set(-0.65);
      } else if (joystick0.GetRawButtonPressed(2)) {
-       spark0.Set(0);
-       spark1.Set(0);
+        spark0.Set(0);
+        spark1.Set(0);
      } 
-    /*//Spark Max #1
-     if (joystick0.GetRawButtonPressed(5))
-       spark1.Set(-.1);
-     else if (joystick0.GetRawButtonPressed(6))
-       spark1.Set(-.2);
-     else if (joystick0.GetRawButtonPressed(3))
-       spark1.Set(-.3);
-     else if (joystick0.GetRawButtonPressed(4))
-       spark1.Set(-.4);
-     else if (joystick0.GetRawButtonPressed(7))
-       spark1.Set(-.5);
-     else if (joystick0.GetRawButtonPressed(8))
-       spark1.Set(-.6);
-     else if (joystick0.GetRawButtonPressed(9))
-       spark1.Set(-.7);
-     else if (joystick0.GetRawButtonPressed(10))
-       spark1.Set(-.8);
-     else if (joystick0.GetRawButtonPressed(11))
-       spark1.Set(-1);
-     if (joystick0.GetRawButtonPressed(12))
-       spark1.Set(0);
-    */
 }
 
 void Robot::TestPeriodic() {}
