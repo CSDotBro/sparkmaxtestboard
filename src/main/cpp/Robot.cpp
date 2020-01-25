@@ -11,6 +11,8 @@
 #include <units/units.h>
 #include <wpi/math>
 
+using namespace Constants;
+
 Robot::Robot(){
     encoder0.SetVelocityConversionFactor(wpi::math::pi * 2.0 / 60.0);
     encoder1.SetVelocityConversionFactor(wpi::math::pi * 2.0 / 60.0);
@@ -56,7 +58,14 @@ void Robot::RobotPeriodic() {
     else if (matchedColor == kGreenArea)
         kColorString = "Green";
     else
-        kColorString = "Unknown Color";
+        kColorString = "Unknown";
+
+    frc::SmartDashboard::PutNumber("Red", m_detectedColor.red);
+    frc::SmartDashboard::PutNumber("Blue", m_detectedColor.blue);
+    frc::SmartDashboard::PutNumber("Green", m_detectedColor.green);
+    frc::SmartDashboard::PutNumber("Confidence", kConfidence);
+    frc::SmartDashboard::PutString("Detected Color", kColorString);
+
 }
 
 void Robot::AutonomousInit() {}
