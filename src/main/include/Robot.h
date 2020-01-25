@@ -9,6 +9,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <rev/CANSparkMax.h>
 #include <rev/CANSparkMaxLowLevel.h>
+#include "Constants.hpp"
 
 #include "logging/CsvLogger.hpp"
 
@@ -41,4 +42,8 @@ private:
     rev::CANPIDController controller0 = spark0.GetPIDController();
     rev::CANPIDController controller1 = spark1.GetPIDController();
     units::revolutions_per_minute_t reference = 0.0_rpm;
+
+    static constexpr auto ki2cPort = frc::I2C::Port::kOnboard;
+    rev::ColorSensorV3 m_ColorSensor{ki2cPort};
+    rev::ColorMatch m_ColorMatch;
 };

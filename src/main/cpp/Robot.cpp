@@ -30,6 +30,9 @@ void Robot::RobotPeriodic() {
     //std::cout << "Left Temp: " << spark1.GetMotorTemperature() << std::endl;
 
     logger.Log(spark0.GetMotorTemperature(), spark1.GetMotorTemperature(), encoder0.GetVelocity(), encoder1.GetVelocity());
+
+    //Color Sensor Stuff
+    
 }
 
 void Robot::AutonomousInit() {}
