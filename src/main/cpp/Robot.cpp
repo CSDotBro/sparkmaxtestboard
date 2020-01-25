@@ -5,6 +5,7 @@
 #include "Robot.h"
 
 #include <iostream>
+#include <string>
 
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <units/units.h>
@@ -21,7 +22,15 @@ Robot::Robot(){
     controller0.SetD(0);
     controller1.SetD(0);
 }
-void Robot::RobotInit() {}
+void Robot::RobotInit() {
+
+    //Color Sensor Registeration
+    m_ColorMatch.AddColorMatch(kBlueArea);
+    m_ColorMatch.AddColorMatch(kRedArea);
+    m_ColorMatch.AddColorMatch(kGreenArea);
+    m_ColorMatch.AddColorMatch(kYellowArea);
+
+}
 
 void Robot::RobotPeriodic() {
     //std::cout << "Left Vel:" << encoder0.GetVelocity() << std::endl;
@@ -31,8 +40,23 @@ void Robot::RobotPeriodic() {
 
     logger.Log(spark0.GetMotorTemperature(), spark1.GetMotorTemperature(), encoder0.GetVelocity(), encoder1.GetVelocity());
 
-    //Color Sensor Stuff
-    
+    //Initalize values to controll identifying colors
+    frc::Color m_detectedColor = m_ColorSensor.GetColor();
+    std::string kColorString;
+    double kConfidence = 0.0;
+    frc::Color matchedColor = m_ColorMatch.MatchClosestColor(m_detectedColor, kConfidence);
+
+     //Logic statements for checking the colors
+    if (matchedColor == kBlueArea)
+        kColorString = "Blue";
+    else if (matchedColor == kYellowArea)
+        kColorString = "Yellow";
+    else if (matchedColor == kRedArea)
+        kColorString = "Red";
+    else if (matchedColor == kGreenArea)
+        kColorString = "Green";
+    else
+        kColorString = "Unknown Color";
 }
 
 void Robot::AutonomousInit() {}
@@ -43,7 +67,7 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
     constexpr units::radians_per_second_t kMaxSpeed = 558.904_rad_per_s;
-
+    
     // Spark Max # 0
     /*if (joystick0.GetRawButtonPressed(5)) {
         reference = kMaxSpeed * 0.1;
