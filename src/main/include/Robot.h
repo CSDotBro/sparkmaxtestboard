@@ -10,6 +10,10 @@
 #include <rev/CANSparkMax.h>
 #include <rev/CANSparkMaxLowLevel.h>
 
+#include "logging/CsvLogger.hpp"
+
+using namespace frc3512;
+
 class Robot : public frc::TimedRobot {
 public:
     Robot();
@@ -24,10 +28,16 @@ public:
 private:
     frc::Joystick joystick0{0};
     // frc::Joystick joystick1{1};
+
+
     rev::CANSparkMax spark0{14, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
     rev::CANSparkMax spark1{15, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+
+
     rev::CANEncoder encoder0 = spark0.GetEncoder();
     rev::CANEncoder encoder1 = spark1.GetEncoder();
+    CsvLogger logger{"/home/lvuser/SMTestboard.csv",
+                             "LeftSMTemp,RightSMTemp,LeftSMVelocity,RightSMVelocity"};
     rev::CANPIDController controller0 = spark0.GetPIDController();
     rev::CANPIDController controller1 = spark1.GetPIDController();
     units::revolutions_per_minute_t reference = 0.0_rpm;
